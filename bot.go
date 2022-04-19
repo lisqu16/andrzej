@@ -33,14 +33,11 @@ func init() {
 
 func main() {
 	token := os.Getenv("TOKEN")
-	if token == "" {
-		log.Panicln("gimme token")
-	}
 
 	cmds := &Bot{}
 	bot.Run(token, cmds, func(c *bot.Context) error {
 		c.HasPrefix = bot.NewPrefix(",")
-		c.Gateway.AddIntents(gateway.IntentGuildMessages)
+		c.SilentUnknown.Command = true
 
 		return nil
 	})
